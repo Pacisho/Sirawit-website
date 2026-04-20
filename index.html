@@ -1,15 +1,436 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>แกลเลอรี่รูป</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeSaga ID Shop - ร้านไอดีเกม PokéSaga</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --neon-red: #ff0044;
+        }
+        
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(90deg, #0a0a0a, #1a0000);
+            color: #fff;
+        }
+        
+        .neon-text {
+            text-shadow: 
+                0 0 5px var(--neon-red),
+                0 0 10px var(--neon-red),
+                0 0 20px var(--neon-red),
+                0 0 40px var(--neon-red);
+        }
+        
+        .neon-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--neon-red), 0 0 25px var(--neon-red);
+        }
+        
+        .neon-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--neon-red), 0 0 50px var(--neon-red);
+        }
+        
+        .hero-container {
+            border: 4px solid var(--neon-red);
+            box-shadow: 0 0 40px var(--neon-red);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen pb-12">
 
-<h1>🎨 แกลเลอรี่รูปวาด</h1>
-<div id="gallery"></div>
+    <!-- NAVBAR -->
+    <nav class="bg-black/90 backdrop-blur-lg border-b border-red-500 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500 rounded-2xl flex items-center justify-center text-3xl shadow-[0_0_15px_#ff0044]">
+                    ⚔️
+                </div>
+                <h1 class="text-3xl font-bold neon-text">POKESAGA</h1>
+                <span class="text-xl font-medium text-red-400">ID SHOP</span>
+            </div>
 
-<script src="script.js"></script>
+            <div class="flex items-center gap-8 text-lg">
+                <a onclick="showSection('home')" class="cursor-pointer hover:text-red-400 transition-colors">หน้าแรก</a>
+                <a onclick="showSection('products')" class="cursor-pointer hover:text-red-400 transition-colors">สินค้า</a>
+                <a onclick="showSection('contact')" class="cursor-pointer hover:text-red-400 transition-colors">ติดต่อ</a>
+                
+                <button onclick="toggleAdminLogin()" 
+                        class="neon-button bg-black border-2 border-red-500 text-white px-6 py-2 rounded-2xl flex items-center gap-2 font-medium">
+                    <span>🔑</span> Admin
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO BANNER (แก้ไขใหม่) -->
+    <section id="home" class="max-w-7xl mx-auto px-6 pt-12">
+        <div class="hero-container bg-black rounded-3xl overflow-hidden relative">
+            <img id="hero-image" 
+                 src="https://picsum.photos/id/1015/1200/600" 
+                 alt="PokéSaga Hero" 
+                 class="w-full h-[520px] object-cover">
+            
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent flex items-center">
+                <div class="max-w-2xl px-12">
+                    <div class="inline-flex items-center gap-3 bg-red-600 text-white text-xl font-bold px-8 py-2 rounded-3xl mb-6 shadow-lg">
+                        <span class="text-3xl">🔥</span> HOT
+                    </div>
+                    
+                    <h2 class="text-6xl font-bold leading-none neon-text mb-6">
+                        ไอดีเกม PokéSaga<br>ราคาถูกที่สุดในไทย
+                    </h2>
+                    <p class="text-2xl text-red-300 mb-10">
+                        ไอดีพรีเมี่ยม • ไอดีหายาก • Legendary • Lv.Max
+                    </p>
+                    
+                    <div class="flex gap-5">
+                        <button onclick="showSection('products')" 
+                                class="neon-button bg-red-500 hover:bg-red-600 text-white text-2xl font-bold px-12 py-6 rounded-3xl flex items-center gap-3">
+                            🛒 ซื้อไอดีเลย
+                        </button>
+                        <a href="https://www.facebook.com/share/1KbD6BvdeK/" target="_blank"
+                           class="border-2 border-red-400 hover:border-white text-red-300 hover:text-white text-2xl font-bold px-12 py-6 rounded-3xl flex items-center gap-3 transition-all">
+                            💬 ติดต่อเฟสบุ๊ค
+                        </a>
+                    </div>
+                    
+                    <div class="mt-10 flex gap-8 text-sm">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 font-medium">พร้อมใช้งานทันที</span>
+                        </div>
+                        <div>✅ Real-time Update</div>
+                        <div>✅ เปลี่ยนไอดีได้ตลอด</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="products" class="max-w-7xl mx-auto px-6 py-12 hidden">
+        <div class="flex justify-between items-end mb-8">
+            <h2 class="text-5xl font-bold neon-text">สินค้าไอดีทั้งหมด</h2>
+            <p class="text-red-400 text-lg">อัพเดทเรียลไทม์ • <span id="product-count" class="font-mono"></span> ชิ้น</p>
+        </div>
+        <div id="product-grid" class="product-grid"></div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="max-w-7xl mx-auto px-6 py-12 bg-black/50 rounded-3xl mx-6 hidden">
+        <h2 class="text-5xl font-bold neon-text text-center mb-10">ช่องทางการติดต่อ</h2>
+        <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
+            <a href="https://www.facebook.com/share/1KbD6BvdeK/" target="_blank"
+               class="flex-1 max-w-md bg-black border-2 border-red-500 hover:border-red-400 p-8 rounded-3xl text-center transition-all">
+                <div class="text-6xl mb-4">📘</div>
+                <p class="text-3xl font-bold">Facebook</p>
+                <p class="text-red-400 mt-2">คลิกเพื่อแชทกับแอดมิน</p>
+                <p class="text-sm text-gray-400 mt-6">https://www.facebook.com/share/1KbD6BvdeK/</p>
+            </a>
+            
+            <div class="text-center text-gray-400 max-w-xs">
+                <p class="text-xl">หรือแอดไลน์แอดมิน</p>
+                <p class="text-4xl font-mono text-red-400 mt-4">@pokesagaid</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="admin-login-modal" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center z-[9999]">
+        <div class="bg-black border-4 border-red-500 rounded-3xl p-10 w-full max-w-md">
+            <h3 class="text-4xl font-bold neon-text text-center mb-6">เข้าสู่ระบบ Admin</h3>
+            <input id="admin-username" type="text" value="admin" placeholder="Username"
+                   class="w-full bg-black border border-red-500 rounded-2xl px-6 py-4 text-xl mb-4">
+            <input id="admin-password" type="password" value="pokesaga123" placeholder="Password"
+                   class="w-full bg-black border border-red-500 rounded-2xl px-6 py-4 text-xl mb-8">
+            
+            <button onclick="loginAdmin()" 
+                    class="neon-button w-full bg-red-500 text-white text-2xl py-5 rounded-3xl font-bold">
+                เข้าสู่ระบบ
+            </button>
+            <p class="text-center text-red-300 text-sm mt-6"></p>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="admin-panel" class="hidden fixed inset-0 bg-black/95 z-[10000] overflow-auto">
+        <div class="max-w-7xl mx-auto p-8">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-5xl font-bold neon-text">👑 Admin Dashboard</h2>
+                <div>
+                    <button onclick="hideAdminPanel()" class="px-8 py-3 bg-red-600 rounded-2xl text-xl font-bold">ปิด</button>
+                </div>
+            </div>
+
+            <!-- เปลี่ยนรูป Hero -->
+            <div class="bg-black border-2 border-red-500 rounded-3xl p-8 mb-10">
+                <h3 class="text-3xl font-bold mb-4">เปลี่ยนรูปภาพ Hero Banner</h3>
+                <p class="text-red-300 mb-6">อัพโหลดรูปที่ต้องการใช้แทนภาพปก (แนะนำขนาดกว้าง 1200px)</p>
+                <input type="file" id="hero-upload" accept="image/*" 
+                       class="w-full bg-black border border-red-500 rounded-2xl p-4 text-white file:mr-4 file:py-3 file:px-8 file:rounded-2xl file:bg-red-500 file:text-white">
+                <button onclick="uploadHeroImage()" 
+                        class="mt-6 neon-button bg-red-500 px-12 py-4 rounded-3xl text-xl font-bold">
+                    อัพโหลดและเปลี่ยนรูปทันที
+                </button>
+            </div>
+
+            <!-- เพิ่มไอดีใหม่ -->
+            <div class="bg-black border-2 border-red-500 rounded-3xl p-8 mb-10">
+                <h3 class="text-3xl font-bold mb-6">➕ เพิ่มไอดีใหม่</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <input id="new-title" type="text" placeholder="ชื่อไอดี" class="bg-black border border-red-500 rounded-2xl px-6 py-4">
+                    <input id="new-price" type="number" value="299" placeholder="ราคา" class="bg-black border border-red-500 rounded-2xl px-6 py-4">
+                    <input id="new-desc" type="text" placeholder="รายละเอียด" class="bg-black border border-red-500 rounded-2xl px-6 py-4">
+                </div>
+                <div class="mt-6">
+                    <label class="block text-red-400 text-sm mb-2">รูปภาพไอดี (optional)</label>
+                    <input id="new-image" type="file" accept="image/*" class="w-full bg-black border border-red-500 rounded-2xl p-4">
+                </div>
+                <button onclick="addNewProduct()" class="mt-8 neon-button bg-red-500 px-12 py-5 rounded-3xl text-xl font-bold">
+                    เพิ่มไอดีทันที
+                </button>
+            </div>
+
+            <!-- ตารางไอดี -->
+            <div class="bg-black border-2 border-red-500 rounded-3xl overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-red-950">
+                        <tr>
+                            <th class="p-6 text-left">รูป</th>
+                            <th class="p-6 text-left">ชื่อไอดี</th>
+                            <th class="p-6 text-left">ราคา</th>
+                            <th class="p-6 text-left">รายละเอียด</th>
+                            <th class="p-6 text-center">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body" class="divide-y divide-red-900"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let products = JSON.parse(localStorage.getItem('pokesaga_products')) || [
+            { id: 1, title: "ไอดีพรีเมี่ยม Lv.Max", price: 299, desc: "Legendary 3 ตัว + 5000 Diamond", image: "https://picsum.photos/id/1015/600/600" },
+            { id: 2, title: "ไอดีหายาก Mythic", price: 499, desc: "Skin Limited + Mythic Rank", image: "https://picsum.photos/id/1005/600/600" }
+        ];
+
+        let heroImageSrc = localStorage.getItem('pokesaga_hero_image') || "https://picsum.photos/id/1015/1200/600";
+
+        function renderHero() {
+            const img = document.getElementById('hero-image');
+            if (img) img.src = heroImageSrc;
+        }
+
+        function uploadHeroImage() {
+            const fileInput = document.getElementById('hero-upload');
+            if (!fileInput.files[0]) return alert("กรุณาเลือกไฟล์รูปภาพ");
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                heroImageSrc = e.target.result;
+                localStorage.setItem('pokesaga_hero_image', heroImageSrc);
+                renderHero();
+                alert("✅ เปลี่ยนรูป Hero Banner สำเร็จแล้ว!");
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        // ฟังก์ชันอื่น ๆ (render products, admin functions) เหมือนเดิม
+        function loadProducts() {
+            const saved = localStorage.getItem('pokesaga_products');
+            if (saved) products = JSON.parse(saved);
+            renderUserProducts();
+            renderAdminTable();
+        }
+
+        function saveProducts() {
+            localStorage.setItem('pokesaga_products', JSON.stringify(products));
+            renderUserProducts();
+            renderAdminTable();
+        }
+
+        function renderUserProducts() {
+            const container = document.getElementById('product-grid');
+            container.innerHTML = '';
+            document.getElementById('product-count').textContent = products.length;
+
+            products.forEach(product => {
+                const html = `
+                <div class="card bg-black border border-red-900 rounded-3xl overflow-hidden">
+                    <div class="relative">
+                        <img src="${product.image}" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-red-500 text-white font-bold px-5 py-1 rounded-2xl">
+                            ${product.price} บาท
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold">${product.title}</h4>
+                        <p class="text-red-300 my-4">${product.desc}</p>
+                        <button onclick="buyProduct(${product.id})" 
+                                class="neon-button w-full bg-red-500 py-4 rounded-3xl font-bold text-lg">
+                            ซื้อไอดีนี้
+                        </button>
+                    </div>
+                </div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        function buyProduct(id) {
+            const p = products.find(x => x.id === id);
+            if (!p) return;
+            const msg = `สวัสดีครับ ต้องการซื้อไอดี\nชื่อ: ${p.title}\nราคา: ${p.price} บาท\nรายละเอียด: ${p.desc}`;
+            window.open(`https://www.facebook.com/share/1KbD6BvdeK/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function toggleAdminLogin() {
+            document.getElementById('admin-login-modal').classList.remove('hidden');
+            document.getElementById('admin-login-modal').classList.add('flex');
+        }
+
+        function hideAdminLogin() {
+            const modal = document.getElementById('admin-login-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function loginAdmin() {
+            const user = document.getElementById('admin-username').value;
+            const pass = document.getElementById('admin-password').value;
+            if (user === 'admin' && pass === 'pokesaga123') {
+                hideAdminLogin();
+                document.getElementById('admin-panel').classList.remove('hidden');
+                document.getElementById('admin-panel').classList.add('flex');
+                renderAdminTable();
+            } else {
+                alert('รหัสผ่านไม่ถูกต้อง');
+            }
+        }
+
+        function hideAdminPanel() {
+            document.getElementById('admin-panel').classList.add('hidden');
+            document.getElementById('admin-panel').classList.remove('flex');
+        }
+
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = '';
+            products.forEach((p, i) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="p-6"><img src="${p.image}" class="w-16 h-16 object-cover rounded-2xl"></td>
+                    <td class="p-6">${p.title}</td>
+                    <td class="p-6 font-mono">${p.price}</td>
+                    <td class="p-6">${p.desc}</td>
+                    <td class="p-6 text-center">
+                        <button onclick="editProduct(${i})" class="bg-yellow-500 text-black px-5 py-2 rounded-xl mr-2">แก้ไข</button>
+                        <button onclick="deleteProduct(${i})" class="bg-red-600 px-5 py-2 rounded-xl">ลบ</button>
+                    </td>`;
+                tbody.appendChild(row);
+            });
+        }
+
+        function addNewProduct() {
+            const title = document.getElementById('new-title').value.trim();
+            const price = parseInt(document.getElementById('new-price').value);
+            const desc = document.getElementById('new-desc').value.trim();
+            const file = document.getElementById('new-image').files[0];
+
+            if (!title || !price) return alert('กรุณากรอกชื่อและราคา');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const newP = { id: Date.now(), title, price, desc: desc || 'ไอดีเกม PokéSaga', image: e.target.result };
+                    products.unshift(newP);
+                    saveProducts();
+                    clearForm();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const newP = { id: Date.now(), title, price, desc: desc || 'ไอดีเกม PokéSaga', image: 'https://picsum.photos/id/1005/600/600' };
+                products.unshift(newP);
+                saveProducts();
+                clearForm();
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('new-title').value = '';
+            document.getElementById('new-price').value = '299';
+            document.getElementById('new-desc').value = '';
+            document.getElementById('new-image').value = '';
+        }
+
+        function editProduct(i) {
+            const p = products[i];
+            const newTitle = prompt("ชื่อไอดีใหม่:", p.title);
+            if (newTitle === null) return;
+            const newPrice = parseInt(prompt("ราคาใหม่:", p.price));
+            if (isNaN(newPrice)) return;
+            const newDesc = prompt("รายละเอียดใหม่:", p.desc);
+
+            if (confirm("ต้องการเปลี่ยนรูปภาพด้วยไหม?")) {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = e => {
+                    const r = new FileReader();
+                    r.onload = ev => {
+                        p.image = ev.target.result;
+                        p.title = newTitle;
+                        p.price = newPrice;
+                        p.desc = newDesc || p.desc;
+                        saveProducts();
+                    };
+                    r.readAsDataURL(e.target.files[0]);
+                };
+                input.click();
+            } else {
+                p.title = newTitle;
+                p.price = newPrice;
+                p.desc = newDesc || p.desc;
+                saveProducts();
+            }
+        }
+
+        function deleteProduct(i) {
+            if (confirm('ยืนยันลบไอดีนี้?')) {
+                products.splice(i, 1);
+                saveProducts();
+            }
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            if (section === 'home') document.getElementById('home').classList.remove('hidden');
+            else if (section === 'products') document.getElementById('products').classList.remove('hidden');
+            else if (section === 'contact') document.getElementById('contact').classList.remove('hidden');
+        }
+
+        window.onload = () => {
+            renderHero();
+            loadProducts();
+            showSection('home');
+            console.log('%cPokeSaga ID Shop พร้อมใช้งานแล้ว!', 'color:#ff0044;font-size:16px');
+        };
+    </script>
 </body>
 </html>

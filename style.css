@@ -1,16 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --neon-red: #ff0022;
+}
+
+* {
+    font-family: 'Press Start 2P', system-ui;
+}
+
 body {
-  font-family: sans-serif;
-  text-align: center;
+    background: linear-gradient(180deg, #0a0000 0%, #1a0000 100%);
+    color: #fff;
+    overflow-x: hidden;
 }
 
-#gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+.neon-text {
+    text-shadow: 
+        0 0 10px var(--neon-red),
+        0 0 20px var(--neon-red),
+        0 0 40px var(--neon-red),
+        0 0 60px #ff8800;
 }
 
-img {
-  width: 200px;
-  border-radius: 10px;
+.neon-button {
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 15px var(--neon-red),
+        0 0 30px var(--neon-red);
+}
+
+.neon-button:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 25px #ff8800,
+        0 0 50px #ff8800;
+}
+
+.card {
+    transition: all 0.4s ease;
+    border: 2px solid #ff0022;
+    background: rgba(10, 0, 0, 0.85);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 40px #ff0022;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -2px;
+    left: 0;
+    background: #ff0022;
+    box-shadow: 0 0 10px #ff0022;
+    transition: all 0.3s;
+}
+
+.nav-link:hover:after {
+    width: 100%;
+}
+
+.admin-panel {
+    animation: neonPulse 2s infinite alternate;
+}
+
+@keyframes neonPulse {
+    from { box-shadow: 0 0 15px #ff0022; }
+    to { box-shadow: 0 0 40px #ff8800; }
+}
+
+.product-table tr {
+    border-bottom: 1px solid #ff002244;
 }
