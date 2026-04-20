@@ -22,11 +22,7 @@
         }
         
         .neon-text {
-            text-shadow: 
-                0 0 5px var(--neon-red),
-                0 0 10px var(--neon-red),
-                0 0 20px var(--neon-red),
-                0 0 40px var(--neon-red);
+            text-shadow: 0 0 5px var(--neon-red), 0 0 10px var(--neon-red), 0 0 20px var(--neon-red), 0 0 40px var(--neon-red);
         }
         
         .neon-button {
@@ -58,67 +54,96 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 24px;
         }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen pb-12">
 
     <!-- NAVBAR -->
     <nav class="bg-black/90 backdrop-blur-lg border-b border-red-500 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-red-500 rounded-2xl flex items-center justify-center text-3xl shadow-[0_0_15px_#ff0044]">
-                    ⚔️
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 md:w-10 md:h-10 bg-red-500 rounded-2xl flex items-center justify-center text-3xl shadow-[0_0_15px_#ff0044]">
+                        ⚔️
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-bold neon-text">POKESAGA</h1>
+                    <span class="hidden md:inline text-xl font-medium text-red-400">ID SHOP</span>
                 </div>
-                <h1 class="text-3xl font-bold neon-text">POKESAGA</h1>
-                <span class="text-xl font-medium text-red-400">ID SHOP</span>
-            </div>
 
-            <div class="flex items-center gap-8 text-lg">
-                <a onclick="showSection('home')" class="cursor-pointer hover:text-red-400 transition-colors">หน้าแรก</a>
-                <a onclick="showSection('products')" class="cursor-pointer hover:text-red-400 transition-colors">สินค้า</a>
-                <a onclick="showSection('contact')" class="cursor-pointer hover:text-red-400 transition-colors">ติดต่อ</a>
-                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8 text-lg">
+                    <a onclick="showSection('home')" class="cursor-pointer hover:text-red-400 transition-colors">หน้าแรก</a>
+                    <a onclick="showSection('products')" class="cursor-pointer hover:text-red-400 transition-colors">สินค้า</a>
+                    <a onclick="showSection('contact')" class="cursor-pointer hover:text-red-400 transition-colors">ติดต่อ</a>
+                </div>
+
+                <!-- Admin Button -->
                 <button onclick="toggleAdminLogin()" 
-                        class="neon-button bg-black border-2 border-red-500 text-white px-6 py-2 rounded-2xl flex items-center gap-2 font-medium">
+                        class="neon-button bg-black border-2 border-red-500 text-white px-5 py-2 md:px-6 md:py-2 rounded-2xl flex items-center gap-2 font-medium text-sm md:text-base">
                     <span>🔑</span> Admin
                 </button>
+
+                <!-- Mobile Hamburger -->
+                <button id="mobile-btn" class="md:hidden text-3xl">
+                    ☰
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu hidden md:hidden mt-4 pt-4 border-t border-red-500">
+                <div class="flex flex-col gap-4 text-lg">
+                    <a onclick="showSection('home'); toggleMobileMenu()" class="cursor-pointer hover:text-red-400">หน้าแรก</a>
+                    <a onclick="showSection('products'); toggleMobileMenu()" class="cursor-pointer hover:text-red-400">สินค้า</a>
+                    <a onclick="showSection('contact'); toggleMobileMenu()" class="cursor-pointer hover:text-red-400">ติดต่อ</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- HERO BANNER -->
-    <section id="home" class="max-w-7xl mx-auto px-6 pt-12">
+    <!-- HERO BANNER - Responsive -->
+    <section id="home" class="max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-12">
         <div class="hero-container bg-black rounded-3xl overflow-hidden relative">
             <img id="hero-image" 
                  src="https://picsum.photos/id/1015/1200/600" 
                  alt="PokéSaga Hero" 
-                 class="w-full h-[520px] object-cover">
+                 class="w-full h-[380px] md:h-[520px] object-cover">
             
             <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent flex items-center">
-                <div class="max-w-2xl px-12">
-                    <div class="inline-flex items-center gap-3 bg-red-600 text-white text-xl font-bold px-8 py-2 rounded-3xl mb-6 shadow-lg">
-                        <span class="text-3xl">🔥</span> HOT
+                <div class="max-w-xl md:max-w-2xl px-6 md:px-12">
+                    <div class="inline-flex items-center gap-3 bg-red-600 text-white text-base md:text-xl font-bold px-6 md:px-8 py-2 rounded-3xl mb-4 md:mb-6 shadow-lg">
+                        <span class="text-2xl md:text-3xl">🔥</span> HOT
                     </div>
                     
-                    <h2 class="text-6xl font-bold leading-none neon-text mb-6">
+                    <h2 class="text-4xl md:text-6xl font-bold leading-tight neon-text mb-4 md:mb-6">
                         ไอดีเกม PokéSaga<br>ราคาถูกที่สุดในไทย
                     </h2>
-                    <p class="text-2xl text-red-300 mb-10">
+                    <p class="text-lg md:text-2xl text-red-300 mb-6 md:mb-10">
                         ไอดีพรีเมี่ยม • ไอดีหายาก • Legendary • Lv.Max
                     </p>
                     
-                    <div class="flex gap-5">
+                    <div class="flex flex-col sm:flex-row gap-4 md:gap-5">
                         <button onclick="showSection('products')" 
-                                class="neon-button bg-red-500 hover:bg-red-600 text-white text-2xl font-bold px-12 py-6 rounded-3xl flex items-center gap-3">
+                                class="neon-button bg-red-500 hover:bg-red-600 text-white text-xl md:text-2xl font-bold px-8 md:px-12 py-5 md:py-6 rounded-3xl flex items-center justify-center gap-3">
                             🛒 ซื้อไอดีเลย
                         </button>
                         <a href="https://www.facebook.com/share/1KbD6BvdeK/" target="_blank"
-                           class="border-2 border-red-400 hover:border-white text-red-300 hover:text-white text-2xl font-bold px-12 py-6 rounded-3xl flex items-center gap-3 transition-all">
+                           class="border-2 border-red-400 hover:border-white text-red-300 hover:text-white text-xl md:text-2xl font-bold px-8 md:px-12 py-5 md:py-6 rounded-3xl flex items-center justify-center gap-3 transition-all">
                             💬 ติดต่อเฟสบุ๊ค
                         </a>
                     </div>
                     
-                    <div class="mt-10 flex gap-8 text-sm">
+                    <div class="mt-8 md:mt-10 flex flex-wrap gap-6 text-sm md:text-base">
                         <div class="flex items-center gap-2">
                             <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
                             <span class="text-green-400 font-medium">พร้อมใช้งานทันที</span>
@@ -130,17 +155,18 @@
         </div>
     </section>
 
-    <!-- PRODUCTS & CONTACT SECTION (เหมือนเดิม) -->
-    <section id="products" class="max-w-7xl mx-auto px-6 py-12 hidden">
-        <div class="flex justify-between items-end mb-8">
-            <h2 class="text-5xl font-bold neon-text">สินค้าไอดีทั้งหมด</h2>
-            <p class="text-red-400 text-lg">อัพเดทเรียลไทม์ • <span id="product-count" class="font-mono"></span> ชิ้น</p>
+    <!-- PRODUCTS SECTION -->
+    <section id="products" class="max-w-7xl mx-auto px-4 md:px-6 py-12 hidden">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+            <h2 class="text-4xl md:text-5xl font-bold neon-text">สินค้าไอดีทั้งหมด</h2>
+            <p class="text-red-400 text-base md:text-lg">อัพเดทเรียลไทม์ • <span id="product-count" class="font-mono"></span> ชิ้น</p>
         </div>
         <div id="product-grid" class="product-grid"></div>
     </section>
 
-    <section id="contact" class="max-w-7xl mx-auto px-6 py-12 bg-black/50 rounded-3xl mx-6 hidden">
-        <h2 class="text-5xl font-bold neon-text text-center mb-10">ช่องทางการติดต่อ</h2>
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="max-w-7xl mx-auto px-4 md:px-6 py-12 bg-black/50 rounded-3xl mx-4 md:mx-6 hidden">
+        <h2 class="text-4xl md:text-5xl font-bold neon-text text-center mb-10">ช่องทางการติดต่อ</h2>
         <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
             <a href="https://www.facebook.com/share/1KbD6BvdeK/" target="_blank"
                class="flex-1 max-w-md bg-black border-2 border-red-500 hover:border-red-400 p-8 rounded-3xl text-center transition-all">
@@ -152,10 +178,10 @@
         </div>
     </section>
 
-    <!-- ADMIN LOGIN MODAL (ปรับใหม่ตามภาพ) -->
-    <div id="admin-login-modal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-[9999]">
-        <div class="admin-modal bg-black border-4 border-red-500 rounded-3xl p-10 w-full max-w-md shadow-2xl">
-            <h3 class="text-4xl font-bold neon-text text-center mb-8 text-red-400">
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="admin-login-modal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-[9999] px-4">
+        <div class="admin-modal bg-black border-4 border-red-500 rounded-3xl p-8 md:p-10 w-full max-w-md shadow-2xl">
+            <h3 class="text-3xl md:text-4xl font-bold neon-text text-center mb-8 text-red-400">
                 เข้าสู่ระบบ Admin
             </h3>
             
@@ -166,7 +192,7 @@
                    class="w-full bg-black border-2 border-red-500 focus:border-red-400 rounded-2xl px-6 py-5 text-xl mb-8 outline-none">
             
             <button onclick="loginAdmin()" 
-                    class="neon-button w-full bg-red-500 hover:bg-red-600 text-white text-2xl py-6 rounded-3xl font-bold tracking-wider">
+                    class="neon-button w-full bg-red-500 hover:bg-red-600 text-white text-xl md:text-2xl py-6 rounded-3xl font-bold tracking-wider">
                 เข้าสู่ระบบ
             </button>
             
@@ -176,29 +202,29 @@
         </div>
     </div>
 
-    <!-- ADMIN PANEL (เหมือนเดิม) -->
+    <!-- ADMIN PANEL -->
     <div id="admin-panel" class="hidden fixed inset-0 bg-black/95 z-[10000] overflow-auto">
-        <div class="max-w-7xl mx-auto p-8">
-            <div class="flex justify-between items-center mb-10">
-                <h2 class="text-5xl font-bold neon-text">👑 Admin Dashboard</h2>
-                <button onclick="hideAdminPanel()" class="px-8 py-3 bg-red-600 rounded-2xl text-xl font-bold">ปิด</button>
+        <div class="max-w-7xl mx-auto p-4 md:p-8">
+            <div class="flex justify-between items-center mb-8 md:mb-10">
+                <h2 class="text-4xl md:text-5xl font-bold neon-text">👑 Admin Dashboard</h2>
+                <button onclick="hideAdminPanel()" class="px-6 md:px-8 py-3 bg-red-600 rounded-2xl text-base md:text-xl font-bold">ปิด</button>
             </div>
 
-            <!-- เปลี่ยนรูป Hero -->
-            <div class="bg-black border-2 border-red-500 rounded-3xl p-8 mb-10">
-                <h3 class="text-3xl font-bold mb-4">🖼️ เปลี่ยนรูปภาพ Hero Banner</h3>
-                <p class="text-red-300 mb-6">อัพโหลดรูปที่ต้องการใช้แทนภาพปก (แนะนำขนาดกว้าง 1200px)</p>
+            <!-- Hero Upload -->
+            <div class="bg-black border-2 border-red-500 rounded-3xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold mb-4">🖼️ เปลี่ยนรูปภาพ Hero Banner</h3>
+                <p class="text-red-300 mb-6 text-sm md:text-base">อัพโหลดรูปที่ต้องการใช้แทนภาพปก (แนะนำขนาดกว้าง 1200px)</p>
                 <input type="file" id="hero-upload" accept="image/*" 
                        class="w-full bg-black border border-red-500 rounded-2xl p-4 text-white file:mr-4 file:py-3 file:px-8 file:rounded-2xl file:bg-red-500 file:text-white">
                 <button onclick="uploadHeroImage()" 
-                        class="mt-6 neon-button bg-red-500 px-12 py-4 rounded-3xl text-xl font-bold">
+                        class="mt-6 neon-button bg-red-500 px-10 py-4 rounded-3xl text-lg md:text-xl font-bold w-full md:w-auto">
                     อัพโหลดและเปลี่ยนรูปทันที
                 </button>
             </div>
 
-            <!-- เพิ่มไอดีใหม่ + ตาราง -->
-            <div class="bg-black border-2 border-red-500 rounded-3xl p-8 mb-10">
-                <h3 class="text-3xl font-bold mb-6">➕ เพิ่มไอดีใหม่</h3>
+            <!-- Add Product -->
+            <div class="bg-black border-2 border-red-500 rounded-3xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6">➕ เพิ่มไอดีใหม่</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <input id="new-title" type="text" placeholder="ชื่อไอดี" class="bg-black border border-red-500 rounded-2xl px-6 py-4">
                     <input id="new-price" type="number" value="299" placeholder="ราคา" class="bg-black border border-red-500 rounded-2xl px-6 py-4">
@@ -208,20 +234,21 @@
                     <label class="block text-red-400 text-sm mb-2">รูปภาพไอดี (optional)</label>
                     <input id="new-image" type="file" accept="image/*" class="w-full bg-black border border-red-500 rounded-2xl p-4">
                 </div>
-                <button onclick="addNewProduct()" class="mt-8 neon-button bg-red-500 px-12 py-5 rounded-3xl text-xl font-bold">
+                <button onclick="addNewProduct()" class="mt-8 neon-button bg-red-500 px-12 py-5 rounded-3xl text-lg md:text-xl font-bold w-full md:w-auto">
                     เพิ่มไอดีทันที
                 </button>
             </div>
 
+            <!-- Table -->
             <div class="bg-black border-2 border-red-500 rounded-3xl overflow-hidden">
-                <table class="w-full">
+                <table class="w-full text-sm md:text-base">
                     <thead class="bg-red-950">
                         <tr>
-                            <th class="p-6 text-left">รูป</th>
-                            <th class="p-6 text-left">ชื่อไอดี</th>
-                            <th class="p-6 text-left">ราคา</th>
-                            <th class="p-6 text-left">รายละเอียด</th>
-                            <th class="p-6 text-center">จัดการ</th>
+                            <th class="p-4 md:p-6 text-left">รูป</th>
+                            <th class="p-4 md:p-6 text-left">ชื่อไอดี</th>
+                            <th class="p-4 md:p-6 text-left">ราคา</th>
+                            <th class="p-4 md:p-6 text-left hidden md:table-cell">รายละเอียด</th>
+                            <th class="p-4 md:p-6 text-center">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody id="admin-table-body" class="divide-y divide-red-900"></tbody>
@@ -231,6 +258,8 @@
     </div>
 
     <script>
+        // ... (โค้ด JavaScript ด้านล่างนี้เหมือนเดิมทุกอย่าง แต่เพิ่มฟังก์ชัน Mobile Menu)
+
         let products = JSON.parse(localStorage.getItem('pokesaga_products')) || [
             { id: 1, title: "ไอดีพรีเมี่ยม Lv.Max", price: 299, desc: "Legendary 3 ตัว + 5000 Diamond", image: "https://picsum.photos/id/1015/600/600" },
             { id: 2, title: "ไอดีหายาก Mythic", price: 499, desc: "Skin Limited + Mythic Rank", image: "https://picsum.photos/id/1005/600/600" }
@@ -246,7 +275,6 @@
         function uploadHeroImage() {
             const fileInput = document.getElementById('hero-upload');
             if (!fileInput.files[0]) return alert("กรุณาเลือกไฟล์รูปภาพ");
-
             const reader = new FileReader();
             reader.onload = function(e) {
                 heroImageSrc = e.target.result;
@@ -308,8 +336,6 @@
             const modal = document.getElementById('admin-login-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            
-            // ล้างค่าทุกครั้งที่เปิด modal
             document.getElementById('admin-username').value = '';
             document.getElementById('admin-password').value = '';
         }
@@ -323,13 +349,11 @@
         function loginAdmin() {
             const user = document.getElementById('admin-username').value.trim();
             const pass = document.getElementById('admin-password').value.trim();
-            
             if (user === 'admin' && pass === 'pokesaga123') {
                 hideAdminLogin();
                 document.getElementById('admin-panel').classList.remove('hidden');
                 document.getElementById('admin-panel').classList.add('flex');
                 renderAdminTable();
-                alert('✅ เข้าสู่ระบบ Admin สำเร็จ');
             } else {
                 alert('❌ Username หรือ Password ไม่ถูกต้อง');
             }
@@ -340,20 +364,19 @@
             document.getElementById('admin-panel').classList.remove('flex');
         }
 
-        // ฟังก์ชันอื่น ๆ (renderAdminTable, addNewProduct, editProduct, deleteProduct, showSection) เหมือนเดิม
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             tbody.innerHTML = '';
             products.forEach((p, i) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td class="p-6"><img src="${p.image}" class="w-16 h-16 object-cover rounded-2xl"></td>
-                    <td class="p-6">${p.title}</td>
-                    <td class="p-6 font-mono">${p.price}</td>
-                    <td class="p-6">${p.desc}</td>
-                    <td class="p-6 text-center">
-                        <button onclick="editProduct(${i})" class="bg-yellow-500 text-black px-5 py-2 rounded-xl mr-2">แก้ไข</button>
-                        <button onclick="deleteProduct(${i})" class="bg-red-600 px-5 py-2 rounded-xl">ลบ</button>
+                    <td class="p-4 md:p-6"><img src="${p.image}" class="w-12 h-12 md:w-16 md:h-16 object-cover rounded-2xl"></td>
+                    <td class="p-4 md:p-6">${p.title}</td>
+                    <td class="p-4 md:p-6 font-mono">${p.price}</td>
+                    <td class="p-4 md:p-6 hidden md:table-cell">${p.desc}</td>
+                    <td class="p-4 md:p-6 text-center">
+                        <button onclick="editProduct(${i})" class="bg-yellow-500 text-black px-4 py-2 rounded-xl text-sm md:text-base mr-2">แก้ไข</button>
+                        <button onclick="deleteProduct(${i})" class="bg-red-600 px-4 py-2 rounded-xl text-sm md:text-base">ลบ</button>
                     </td>`;
                 tbody.appendChild(row);
             });
@@ -432,15 +455,23 @@
 
         function showSection(section) {
             document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-            if (section === 'home') document.getElementById('home').classList.remove('hidden');
-            else if (section === 'products') document.getElementById('products').classList.remove('hidden');
-            else if (section === 'contact') document.getElementById('contact').classList.remove('hidden');
+            document.getElementById(section).classList.remove('hidden');
         }
 
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Initialize
         window.onload = () => {
             renderHero();
             loadProducts();
             showSection('home');
+
+            // Mobile Hamburger
+            document.getElementById('mobile-btn').addEventListener('click', toggleMobileMenu);
         };
     </script>
 </body>
